@@ -16,7 +16,9 @@ plt.xlabel('Etykieta osi X')
 plt.show()
 ```
 
-### Wykres `x` względem `y`
+### Dlaczego oś x ma zakres od 0-3, a oś y od 1-4?
+Jeśli podasz pojedynczą listę lub tablicę do wykreślenia, `matplotlib` zakłada, że jest to sekwencja wartości `y` i automatycznie generuje dla Ciebie wartości `x`. Ponieważ zakresy Pythona zaczynają się od 0, domyślny wektor x ma taką samą długość jak `y`, ale zaczyna się od 0. Stąd wartości `x` to `[0, 1, 2, 3]`.
+Plot jest uniwersalną funkcją i przyjmuje dowolną liczbę argumentów. Na przykład, aby wykreślić `x` względem `y`, można napisać:
 ```python
 plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
 plt.show()
@@ -24,7 +26,8 @@ plt.show()
 
 ## Formatowanie stylu wykresu
 
-Każda para argumentów `x, y` może mieć dodatkowy argument `fmt`, który określa kolor i styl linii.
+Każda para argumentów `x, y` może mieć dodatkowy argument `fmt`, który określa kolor i styl linii. Litery i symbole łańcucha formatu pochodzą z MATLABa, i łączy się łańcuch koloru z łańcuchem stylu linii. Domyślnym łańcuchem formatu jest `b-`, który jest niebieską linią ciągłą. 
+Na przykład, aby wykreślić wcześniejszy wykres używając czerwonych punktów, należy wydać polecenie:
 
 ```python
 plt.plot([1, 2, 3, 4], [1, 4, 9, 16], 'r.')
@@ -33,6 +36,9 @@ plt.show()
 ```
 
 Pełna lista stylów linii znajduje się [tutaj](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html).
+
+Funkcja `axis` w powyższym przykładzie przyjmuje listę `[xmin, xmax, ymin, ymax]` i określa zakresy wartości przedstawiane na osiach.
+Gdyby matplotlib był ograniczony do pracy z listami, byłby dość bezużyteczny do przetwarzania liczb. W rzeczywistości wszystkie sekwencje są wewnętrznie konwertowane na tablice `numpy`. Poniższy przykład ilustruje wykreślanie kilku linii o różnych stylach formatowania w jednym wywołaniu funkcji przy użyciu tablic.
 
 ### Wiele linii na jednym wykresie
 ```python
@@ -43,6 +49,8 @@ t = np.arange(0., 5., 0.2)
 plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
 plt.show()
 ```
+![image](https://github.com/user-attachments/assets/0fe97029-799e-4f20-b00c-1d4e3a7f411c)
+
 
 ## Wiele wykresów w jednym obszarze
 
@@ -58,16 +66,39 @@ plt.show()
 ```
 
 ### Wykresy dla tablicy 2D
+`x` i/lub `y` są tablicami 2D, wtedy dla każdej kolumny zostanie narysowany osobny zestaw danych
 ```python
 x = [1, 2, 3]
 y = np.array([[1, 2], [3, 4], [5, 6]])
 plt.plot(x, y)
 plt.show()
 ```
+```python
+x = [1, 2, 3]
+y = np.array([[1, 2], [3, 4], [5, 6]])
+for col in range(y.shape[1]):
+plt.plot(x, y[:, col])
+plt.show()
+```
+
+### określenie wielu zestawów składających się z współrzędnych `[x]`, `y` oraz z stringa definiującego kolor i styl linii `[fmt]`:
+```python
+y1 = [2, 4, 6]
+plt.plot(x, y1, 'bo', x, [value * 3 for value in y1], 'go')
+plt.show()
+```
+Dodatkowo dla serii danych można parametry tj. szerokość linii, etykietę legendy i inne
+```python
+plt.plot([1, 2, 3], [1, 2, 3], 'go-', label='line 1', linewidth=4)
+plt.plot([1, 2, 3], [1, 4, 9], 'md:', label='line 2', markersize=15)
+plt.legend()
+plt.show()
+```
+Więcej na temat legend znajduje się [tutaj](https://matplotlib.org/stable/users/explain/axes/legend_guide.html).
 
 ## Praca z wieloma figurami i osiami
 
-Matplotlib umożliwia rysowanie wykresów względem wielu osi.
+Matplotlib umożliwia rysowanie wykresów względem wielu osi. Wszystkie funkcje kreślenia odnoszą się do bieżących osi. Poniżej znajduje się skrypt tworzący dwa podwykresy.
 
 ```python
 def f(t):
@@ -84,6 +115,12 @@ plt.subplot(212)
 plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
 plt.show()
 ```
+![image](https://github.com/user-attachments/assets/9ad2df1c-98d0-41ef-a211-b872e0d1e7d4)
+
+Wywołanie funkcji `figure` jest opcjonalne, ponieważ figura zostanie utworzona, jeśli nie istnieje, tak samo jak oś zostanie utworzona (odpowiednik jawnego wywołania `subplot()`), jeśli nie istnieje. Wywołanie `subplot` określa `numrows`, `numcols`, `plot_number`, gdzie `plot_number` mieści się w zakresie od `1` do `numrows*numcols`. Przecinki w wywołaniu `subplot` są opcjonalne, jeśli `numrows*numcols<10`. Zatem `subplot(211)` da taki sam rezultat jak `subplot(2, 1, 1)`.
+Możesz stworzyć dowolną liczbę podwykresów i osi. Jeśli chcesz umieścić oś ręcznie, tj. nie na siatce prostokątnej, użyj `axes`, który pozwala określić położenie jako `axes([left, bottom, width, height])`, gdzie wszystkie wartości są we współrzędnych ułamkowych (0 do 1).
+Przykład ręcznego umieszczania osi [tutaj](https://matplotlib.org/stable/_downloads/fbec90da3a9f58258ab121e0d2037693/axes_demo.py)
+Przykładu z dużą ilością podwykresów [tutaj](https://matplotlib.org/stable/gallery/subplots_axes_and_figures/subplots_demo.html)
 
 ## Inne typy wykresów
 
@@ -98,6 +135,7 @@ ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%', shadow=True, s
 ax1.axis('equal')
 plt.show()
 ```
+Inne warianty wykresów kołowych dostępne pod adresem [https://matplotlib.org/stable/gallery/pie_and_polar_charts/index.html](https://matplotlib.org/stable/gallery/pie_and_polar_charts/index.html)
 
 ### Wykres słupkowy
 ```python
