@@ -194,8 +194,11 @@ for key, value in data.items():
             print(k, v["PLN"])
 ```
 :four: Narysuj wykres funkcji $y = x^2$ dla $x \in [-5,5]$.
+
 :five: Narysuj wykres `sin(x)` i `cos(x)` dla $x \in [0, 2\pi]$.
+
 :six: Narysuj wykres 3D powierzchni $z = x^2 + y^2$.
+
 :seven: Narysuj wykres słupkowy liczby urodzeń wg płci.
     > Przyjmij, że dane na temat urodzeń to lista krotek np.
         `dane = [(100, 90), (110, 95), (120, 105), (130, 110)]`
@@ -204,9 +207,11 @@ for key, value in data.items():
     ![image](https://github.com/user-attachments/assets/47bc7614-565e-4d76-a60b-0291d440ab05)
 
 :eight: Narysuj wykres punktowy zależności masy ciała od wzrostu dla grupy osób.
+
 :nine: Narysuj wykres kołowy rozkładu różnych owoców w koszu.
     > Przyjmij, że dane na temat owoców to lista krotek np.
     `data = [('jabłka', 30), ('gruszki', 20), ('śliwki', 15), ('banany', 25), ('cytryny', 10)]`
+    
 :ten: Narysuj histogram wyników testu studentów.
     > Przyjmij, że dane odnośnie do wyników to lista przechowująca procent uzyskanych punktów przez studentów np.
 `dane = [60, 70, 80, 90, 100, 70, 80, 80, 85, 95]`
