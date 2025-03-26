@@ -200,6 +200,7 @@ for key, value in data.items():
     > Przyjmij, że dane na temat urodzeń to lista krotek np.
         `dane = [(100, 90), (110, 95), (120, 105), (130, 110)]`
     > Dla podanej listy wykres może wyglądać następująco:
+    
     ![image](https://github.com/user-attachments/assets/47bc7614-565e-4d76-a60b-0291d440ab05)
 
 8. Narysuj wykres punktowy zależności masy ciała od wzrostu dla grupy osób.
