@@ -151,19 +151,67 @@ ax.set_title('Fruit supply by kind and color')
 ax.legend(title='Fruit color')
 plt.show()
 ```
+Inne warianty wykresów słupkowych i liniowych: [https://matplotlib.org/stable/gallery/lines_bars_and_markers/index.html](https://matplotlib.org/stable/gallery/lines_bars_and_markers/index.html)
 
+### Wykres 3D
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+ax = plt.axes(projection="3d")
+u = np.linspace(0, 2 * np.pi, 100)
+v = np.linspace(0, np.pi, 100)
+r = 10
+x = r * np.outer(np.cos(u), np.sin(v))
+y = r * np.outer(np.sin(u), np.sin(v))
+z = r * np.outer(np.ones(np.size(u)), np.cos(v))
+ax.plot_surface(x, y, z, rstride=5, cstride=5, cmap=plt.cm.coolwarm)
+plt.show()
+```
+Inne warianty wykresów 3D: [https://matplotlib.org/stable/gallery/lines_bars_and_markers/index.html](https://matplotlib.org/stable/gallery/lines_bars_and_markers/index.html)
 ## Zadania do wykonania
 
 1. Uruchom kod z listingów i sprawdź ich działanie.
 2. Utwórz wykres słupkowy przedstawiający temperatury w tygodniu.
-3. Narysuj dwa wykresy kursów walut na jednym wykresie.
+3. Narysuj dwa wykresy kursów walut na jednym wykresie. Dodaj legendę. Do pobrania wartości kuru z przedziału dat skorzystaj np. z [API](https://exchangerate.host/#/)
+   > Przykład pobiera słownik zawierający kurs EURO w ostatnich dwóch tygodniach
+```python
+import requests
+import datatime
+
+date_to = datetime.date.today()
+date_from = date_to - datetime.timedelta(days=14)
+base = "EUR"
+url = 'https://api.exchangerate.host/timeseries?start_date=' + str(date_from) +
+'&end_date=' + str(
+date_to) + '&base=' + base
+response = requests.get(url)
+
+data = response.json()
+print(data["base"])
+for key, value in data.items():
+    if key == "rates":
+        for k, v in value.items():
+            print(k, v["PLN"])
+```
 4. Narysuj wykres funkcji $y = x^2$ dla $x \in [-5,5]$.
 5. Narysuj wykres `sin(x)` i `cos(x)` dla $x \in [0, 2\pi]$.
 6. Narysuj wykres 3D powierzchni $z = x^2 + y^2$.
 7. Narysuj wykres słupkowy liczby urodzeń wg płci.
-8. Narysuj wykres punktowy zależności masy ciała od wzrostu.
+    > Przyjmij, że dane na temat urodzeń to lista krotek np.
+        `dane = [(100, 90), (110, 95), (120, 105), (130, 110)]`
+    > Dla podanej listy wykres może wyglądać następująco:
+    ![image](https://github.com/user-attachments/assets/47bc7614-565e-4d76-a60b-0291d440ab05)
+
+8. Narysuj wykres punktowy zależności masy ciała od wzrostu dla grupy osób.
 9. Narysuj wykres kołowy rozkładu różnych owoców w koszu.
+    > Przyjmij, że dane na temat owoców to lista krotek np.
+    `data = [('jabłka', 30), ('gruszki', 20), ('śliwki', 15), ('banany', 25), ('cytryny', 10)]`
 10. Narysuj histogram wyników testu studentów.
+    > Przyjmij, że dane odnośnie do wyników to lista przechowująca procent uzyskanych punktów przez studentów np.
+`dane = [60, 70, 80, 90, 100, 70, 80, 80, 85, 95]`
+> Dla podanej listy histogram będzie wyglądał następująco:
+![image](https://github.com/user-attachments/assets/ec53b253-e0d8-4714-ae7c-381a610b6d60)
+
 11. Narysuj funkcję `sine(x)` i jej odbicie lustrzane, aby utworzyć serce.
 
 ```python
