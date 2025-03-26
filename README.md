@@ -170,9 +170,9 @@ plt.show()
 Inne warianty wykresów 3D: [https://matplotlib.org/stable/gallery/lines_bars_and_markers/index.html](https://matplotlib.org/stable/gallery/lines_bars_and_markers/index.html)
 ## Zadania do wykonania
 
-:one: Uruchom kod z listingów i sprawdź ich działanie.
-:two: Utwórz wykres słupkowy przedstawiający temperatury w tygodniu.
-:three: Narysuj dwa wykresy kursów walut na jednym wykresie. Dodaj legendę. Do pobrania wartości kuru z przedziału dat skorzystaj np. z [API](https://exchangerate.host/#/)
+1. Uruchom kod z listingów i sprawdź ich działanie.
+2. Utwórz wykres słupkowy przedstawiający temperatury w tygodniu.
+3. Narysuj dwa wykresy kursów walut na jednym wykresie. Dodaj legendę. Do pobrania wartości kuru z przedziału dat skorzystaj np. z [API](https://exchangerate.host/#/)
    > Przykład pobiera słownik zawierający kurs EURO w ostatnich dwóch tygodniach
 ```python
 import requests
@@ -193,39 +193,39 @@ for key, value in data.items():
         for k, v in value.items():
             print(k, v["PLN"])
 ```
-:four: Narysuj wykres funkcji $y = x^2$ dla $x \in [-5,5]$.
+4. Narysuj wykres funkcji $y = x^2$ dla $x \in [-5,5]$.
 
-:five: Narysuj wykres `sin(x)` i `cos(x)` dla $x \in [0, 2\pi]$.
+5. Narysuj wykres `sin(x)` i `cos(x)` dla $x \in [0, 2\pi]$.
 
-:six: Narysuj wykres 3D powierzchni $z = x^2 + y^2$.
+6. Narysuj wykres 3D powierzchni $z = x^2 + y^2$.
 
-:seven: Narysuj wykres słupkowy liczby urodzeń wg płci.
+7. Narysuj wykres słupkowy liczby urodzeń wg płci.
     > Przyjmij, że dane na temat urodzeń to lista krotek np.
         `dane = [(100, 90), (110, 95), (120, 105), (130, 110)]`
     > Dla podanej listy wykres może wyglądać następująco:
     
     ![image](https://github.com/user-attachments/assets/47bc7614-565e-4d76-a60b-0291d440ab05)
 
-:eight: Narysuj wykres punktowy zależności masy ciała od wzrostu dla grupy osób.
+8. Narysuj wykres punktowy zależności masy ciała od wzrostu dla grupy osób.
 
-:nine: Narysuj wykres kołowy rozkładu różnych owoców w koszu.
+9. Narysuj wykres kołowy rozkładu różnych owoców w koszu.
     > Przyjmij, że dane na temat owoców to lista krotek np.
     `data = [('jabłka', 30), ('gruszki', 20), ('śliwki', 15), ('banany', 25), ('cytryny', 10)]`
     
-:ten: Narysuj histogram wyników testu studentów.
+10. Narysuj histogram wyników testu studentów.
     > Przyjmij, że dane odnośnie do wyników to lista przechowująca procent uzyskanych punktów przez studentów np.
 `dane = [60, 70, 80, 90, 100, 70, 80, 80, 85, 95]`
 > Dla podanej listy histogram będzie wyglądał następująco:
 ![image](https://github.com/user-attachments/assets/ec53b253-e0d8-4714-ae7c-381a610b6d60)
 
-:eleven: Narysuj funkcję `sine(x)` i jej odbicie lustrzane, aby utworzyć serce.
+11. Narysuj funkcję `sine(x)` i jej odbicie lustrzane, aby utworzyć serce.
     ![image](https://github.com/user-attachments/assets/73bd35e0-2609-4a34-8c15-bfe8fac84daa)
 ```python
 def sine(x):
     return np.power(x, (2.0 / 3)) + 0.9 * (3.3 - x ** 2) ** (1 / 2) * np.sin(10 * np.pi * x)
 ```
 
-:twelw: Poniższy kod wyświetla mapę temperatur dla 5 europejskich miast, temperatury pobierane są z API przeanalizuj kod i zmodyfikuj go tak aby wynik był wzbogacony o co najmniej jedno miasto więcej.
+12. Poniższy kod wyświetla mapę temperatur dla 5 europejskich miast, temperatury pobierane są z API przeanalizuj kod i zmodyfikuj go tak aby wynik był wzbogacony o co najmniej jedno miasto więcej.
 
 ```python
 import matplotlib.pyplot as plt
