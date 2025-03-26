@@ -140,4 +140,4 @@ coordinates.append((52.2298, 21.0122))  # Warszawa
 towns.append('Warszawa')
 ```
 
-**Zadania 2-12 mają zostać dodane na platformę Moodle**.
+**Zadania 2-12 mają zostać dodane na repozytorium**.
