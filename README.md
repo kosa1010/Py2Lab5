@@ -214,17 +214,60 @@ for key, value in data.items():
 ![image](https://github.com/user-attachments/assets/ec53b253-e0d8-4714-ae7c-381a610b6d60)
 
 11. Narysuj funkcję `sine(x)` i jej odbicie lustrzane, aby utworzyć serce.
-
+    ![image](https://github.com/user-attachments/assets/73bd35e0-2609-4a34-8c15-bfe8fac84daa)
 ```python
 def sine(x):
     return np.power(x, (2.0 / 3)) + 0.9 * (3.3 - x ** 2) ** (1 / 2) * np.sin(10 * np.pi * x)
 ```
 
-12. Rozbuduj kod pobierający temperatury europejskich miast o dodatkowe miasto.
+12. Poniższy kod wyświetla mapę temperatur dla 5 europejskich miast, temperatury pobierane są z API przeanalizuj kod i zmodyfikuj go tak aby wynik był wzbogacony o co najmniej jedno miasto więcej.
 
 ```python
-coordinates.append((52.2298, 21.0122))  # Warszawa
-towns.append('Warszawa')
+import matplotlib.pyplot as plt
+import numpy as np
+import requests
+import json
+
+# Podaj swój klucz API OpenWeatherMap
+api_key = "7a44285f2b6c4bee04cb011236bcb5a0"
+
+# Utwórz listę współrzędnych geograficznych miast w Europie
+coordinates = [
+    (51.509865, -0.118092), # Londyn
+    (48.856613, 2.352222), # Paryż
+    (52.520008, 13.404954), # Berlin
+    (40.416775, -3.703790), # Madryt
+    (41.902782, 12.496366), # Rzym
+]
+
+towns = ['', 'Londyn', 'Paryż', 'Berlin', 'Madryt', 'Rzym']
+
+# Pobierz dane temperatury dla każdego z miast
+temperatures = []
+for latitude, longitude in coordinates:
+    response = requests.get(“http://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&units=imperial&appid={}”.format(latitude, longitude, api_key))
+    data = response.json()
+    if 'main' in data:
+        temperature = data['main']['temp']
+        temperatures.append(temperature)
+    else:
+        print("Nie udało się pobrać danych dla współrzędnych: ({}, {})".format(latitude, longitude))
+
+# Stwórz tablicę numpy z danymi temperatury
+temperatures = np.array(temperatures)
+
+# Stwórz mapę cieplną z danymi temperatury
+temperatures = temperatures.reshape(-1, 1)
+plt.imshow(temperatures, cmap='coolwarm')
+plt.colorbar()
+
+# definicja podpisów osi
+ax = plt.gca()
+ax.get_xaxis().set_visible(False)
+ax.set_yticklabels(towns)
+
+# Pokaż wykres
+plt.show()
 ```
 
 **Zadania 2-12 mają zostać dodane na repozytorium**.
